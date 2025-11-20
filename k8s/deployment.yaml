@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-node-app
+  namespace: jenkins-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-node-app
+  template:
+    metadata:
+      labels:
+        app: my-node-app
+    spec:
+      containers:
+      - name: my-node-app
+        image: yourdockerhubusername/my-node-app:latest   # <- change this image
+        ports:
+        - containerPort: 3000
+      # If image is private, add imagePullSecrets: - name: regcred
+
