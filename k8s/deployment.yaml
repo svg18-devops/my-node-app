@@ -15,6 +15,8 @@ spec:
     spec:
       containers:
       - name: my-node-app
+        imagePullSecrets:
+        - name: regcred
         image: yourdockerhubusername/my-node-app:latest   # <- change this image
         ports:
         - containerPort: 3000
