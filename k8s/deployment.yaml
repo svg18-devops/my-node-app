@@ -13,12 +13,12 @@ spec:
       labels:
         app: my-node-app
     spec:
-      containers:
-      - name: my-node-app
-        imagePullSecrets:
+      imagePullSecrets:
         - name: regcred
-        image: jarvi18/my-node-app:latest   # <- change this image
-        ports:
-        - containerPort: 3000
+      containers:
+        - name: my-node-app
+          image: jarvi18/my-node-app:latest   # <- change this image
+          ports:
+          - containerPort: 3000
       # If image is private, add imagePullSecrets: - name: regcred
 
