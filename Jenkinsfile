@@ -41,11 +41,21 @@ pipeline {
       steps {
         withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG_FILE')]) {
           sh '''
-            mkdir -p $WORKSPACE/.kube
-            cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
-            export KUBECONFIG=$WORKSPACE/.kube/config
+            # Use Jenkins HOME directory (jenkins has full access here)
+            mkdir -p $HOME/.kube
+            cp "$KUBECONFIG_FILE" $HOME/.kube/config
+            export KUBECONFIG=$HOME/.kube/config
+            
+            # mkdir -p $WORKSPACE/.kube
+            # cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
+            # export KUBECONFIG=$WORKSPACE/.kube/config
+            
             # update k8s manifests with the new image tag (simple sed)
             sed -i "s|jarvi18/my-node-app:.*|${DOCKER_IMAGE}:${IMAGE_TAG}|g" k8s/deployment.yaml
+            
+            echo "🔹 Kubeconfig set successfully!"
+            kubectl get nodes
+            
             kubectl apply -f k8s/deployment.yaml
             kubectl apply -f k8s/service.yaml
           '''
