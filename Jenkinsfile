@@ -45,7 +45,7 @@ pipeline {
             cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
             export KUBECONFIG=$WORKSPACE/.kube/config
             # update k8s manifests with the new image tag (simple sed)
-            sed -i "s|yourdockerhubusername/my-node-app:.*|${DOCKER_IMAGE}:${IMAGE_TAG}|g" k8s/deployment.yaml
+            sed -i "s|jarvi18/my-node-app:.*|${DOCKER_IMAGE}:${IMAGE_TAG}|g" k8s/deployment.yaml
             kubectl apply -f k8s/deployment.yaml
             kubectl apply -f k8s/service.yaml
           '''
