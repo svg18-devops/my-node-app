@@ -39,7 +39,7 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG_FILE')]) {
+        withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
           sh '''
             # Use Jenkins HOME directory (jenkins has full access here)
             # mkdir -p $HOME/.kube
@@ -48,7 +48,7 @@ pipeline {
 
             # mkdir -p /var/lib/jenkins/.kube
             # cp "$KUBECONFIG_FILE" /var/lib/jenkins/.kube/config
-            export KUBECONFIG=/var/lib/jenkins/.kube/config
+            # export KUBECONFIG=/var/lib/jenkins/.kube/config
 
             # export KUBECONFIG=$WORKSPACE/kubeconfig
             #cp "$KUBECONFIG_FILE" $KUBECONFIG
