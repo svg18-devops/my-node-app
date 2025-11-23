@@ -46,11 +46,14 @@ pipeline {
             # cp "$KUBECONFIG_FILE" $HOME/.kube/config
             # export KUBECONFIG=$HOME/.kube/config
 
+            mkdir -p /var/lib/jenkins/.kube
+            cp "$KUBECONFIG_FILE" /var/lib/jenkins/.kube/config
+            export KUBECONFIG=/var/lib/jenkins/.kube/config
+
             # export KUBECONFIG=$WORKSPACE/kubeconfig
             #cp "$KUBECONFIG_FILE" $KUBECONFIG
-
-            export KUBECONFIG=/var/lib/jenkins/.kube/config
-            
+            # export KUBECONFIG=/var/lib/jenkins/.kube/config
+        
             # mkdir -p $WORKSPACE/.kube
             # export KUBECONFIG=$WORKSPACE/.kube/config
             # cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
