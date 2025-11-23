@@ -48,10 +48,12 @@ pipeline {
 
             # export KUBECONFIG=$WORKSPACE/kubeconfig
             #cp "$KUBECONFIG_FILE" $KUBECONFIG
+
+            export KUBECONFIG=/var/lib/jenkins/.kube/config
             
             # mkdir -p $WORKSPACE/.kube
-            export KUBECONFIG=$WORKSPACE/.kube/config
-            cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
+            # export KUBECONFIG=$WORKSPACE/.kube/config
+            # cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
             
             # update k8s manifests with the new image tag (simple sed)
             sed -i "s|jarvi18/my-node-app:.*|${DOCKER_IMAGE}:${IMAGE_TAG}|g" k8s/deployment.yaml
