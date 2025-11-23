@@ -42,9 +42,12 @@ pipeline {
         withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG_FILE')]) {
           sh '''
             # Use Jenkins HOME directory (jenkins has full access here)
-            mkdir -p $HOME/.kube
-            cp "$KUBECONFIG_FILE" $HOME/.kube/config
-            export KUBECONFIG=$HOME/.kube/config
+            # mkdir -p $HOME/.kube
+            # cp "$KUBECONFIG_FILE" $HOME/.kube/config
+            # export KUBECONFIG=$HOME/.kube/config
+
+            export KUBECONFIG=$WORKSPACE/kubeconfig
+            cp "$KUBECONFIG_FILE" $KUBECONFIG
             
             # mkdir -p $WORKSPACE/.kube
             # cp "$KUBECONFIG_FILE" $WORKSPACE/.kube/config
