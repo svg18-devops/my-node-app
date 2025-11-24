@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  triggers {
+      // Trigger build automatically when push event comes from GitHub webhook
+      githubPush()
+  }
+
   environment {
     DOCKER_IMAGE = "jarvi18/my-node-app"
     IMAGE_TAG = "${env.BUILD_NUMBER}"
