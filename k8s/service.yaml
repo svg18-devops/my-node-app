@@ -1,14 +1,30 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: my-node-app
+#   namespace: jenkins-deploy
+# spec:
+#   type: NodePort          # or LoadBalancer if available
+#   selector:
+#     app: my-node-app
+#   ports:
+#     - port: 3000
+#       targetPort: 3000
+#       nodePort: 30080    # choose a free port in nodeport range
+
+###  LoadBalancer
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-node-app
+  name: my-node-app-service
   namespace: jenkins-deploy
 spec:
-  type: NodePort          # or LoadBalancer if available
+  type: LoadBalancer
   selector:
     app: my-node-app
   ports:
-    - port: 3000
+    - protocol: TCP
+      port: 80
       targetPort: 3000
-      nodePort: 30080    # choose a free port in nodeport range
+
 
