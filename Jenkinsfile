@@ -11,6 +11,11 @@ pipeline {
     IMAGE_TAG = "${env.BUILD_NUMBER}"
   }
 
+  options {
+      disableConcurrentBuilds()  // Avoid conflicts on workspace
+      timestamps()
+  }
+
   stages {
     stage('Checkout') {
       steps {
