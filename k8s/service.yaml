@@ -16,7 +16,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-node-app-service
+  name: my-node-app
   namespace: jenkins-deploy
 spec:
   type: LoadBalancer
